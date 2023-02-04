@@ -44,53 +44,6 @@ def knapsack_divide_conquer(wt, val, w):
 	)
 
 # Greedy Algorithm
-# def knapsack_greedy(wt, val, w):
-# 	n = len(val)
-# 	ratio = []
-# 	for i in range(0,n):
-# 		ratio.append(val[i]/wt[i])
-
-# 	for i in range(0,n):
-# 		for j in range(0,n - i - 1):
-# 			if ratio[j] < ratio[j + 1]:
-# 				ratio[j], ratio[j + 1] = ratio[j + 1], ratio[j]
-# 				wt[j], wt[j + 1] = wt[j + 1], wt[j]
-# 				val[j], val[j + 1] = val[j + 1], val[j]
-
-# 	totalValue = 0
-# 	for i in range(0,n):
-# 		if wt[i] <= w:
-# 			totalValue += val[i]
-# 			w -= wt[i]
-# 		else:
-# 			break
-# 	return totalValue
-
-# def knapsack_greedy(weights, values, capacity):
-# 	# Get the number of items
-# 	n = len(values)
-
-# 	# Create a list to store the value-to-weight ratios of each item
-# 	ratios = [(v/w, v, w) for v, w in zip(values, weights)]
-  
-# 	# Sort the list of ratios in descending order based on the ratio
-# 	ratios.sort(reverse=True)
-
-# 	# Initialize the total value
-# 	total_value = 0
-
-# 	# Loop through each item
-# 	for v, w in [(v, w) for r, v, w in ratios if w <= capacity]:
-# 		# If the current item can be added to the knapsack without exceeding the capacity, add its value to the total value and reduce the capacity by its weight
-# 		total_value += v
-# 		capacity -= w
-# 		# If the knapsack is filled to capacity, break the loop
-# 		if capacity == 0:
-# 			break
-  
-# 	# Return the total value of items in the knapsack
-# 	return total_value
-
 def knapsack_greedy(wt, val, w):
 	n = len(val)
 	ratio = []
