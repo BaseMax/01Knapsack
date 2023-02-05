@@ -84,6 +84,22 @@ class Node:
 		self.weight = weight
 		self.bound = bound
 
+class Queue:
+	def __init__(self):
+		self.items = []
+
+	def isEmpty(self):
+		return self.items == []
+
+	def enqueue(self, item):
+		self.items.insert(0, item)
+
+	def dequeue(self):
+		return self.items.pop()
+
+	def size(self):
+		return len(self.items)
+
 def boundValue(node, n, w, val, wt):
 	# If the weight of the node is greater than or equal to the maximum weight, return 0
 	if node.weight >= w:
@@ -227,13 +243,13 @@ def knapsack_first_best(wt, val, w):
 	# create a new node with level -1, value 0, weight 0, and flag 0
 	node = Node(-1, 0, 0, 0)
 	# create a queue to keep track of the nodes in the search tree
-	queue = []
+	queue = Queue()
 	# append the node to the queue
-	queue.append(node)
+	queue.enqueue(node)
 	# keep looping until the queue is empty
-	while len(queue) != 0:
+	while not queue.isEmpty():
 		# pop the first node from the queue
-		node = queue.pop(0)
+		node = queue.dequeue()
 		# increment the level of the node
 		node.level += 1
 		# if the level of the node is less than the number of items
@@ -253,7 +269,7 @@ def knapsack_first_best(wt, val, w):
 			# if the bound value of the left node is greater than the maximum value found so far
 			if leftNode.bound > maxValue:
 				# append the left node to the queue
-				queue.append(leftNode)
+				queue.enqueue(leftNode)
 			# create a new node with level equal to the level of the current node, value equal to the value of the current node, weight equal to the weight of the current node, and flag equal to 1
 			rightNode = Node(node.level, node.value, node.weight, 1)
 			# calculate the bound value of the right node
@@ -261,7 +277,7 @@ def knapsack_first_best(wt, val, w):
 			# if the bound value of the right node is greater than the maximum value found so far
 			if rightNode.bound > maxValue:
 				# append the right node to the queue
-				queue.append(rightNode)
+				queue.enqueue(rightNode)
 	# return the maximum value found so far
 	return maxValue
 
